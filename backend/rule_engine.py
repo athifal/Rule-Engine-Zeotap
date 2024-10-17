@@ -86,23 +86,24 @@ class RuleEngine:
 
         return Node('operand', value=(ident[1], op[1], value[1]))
 
-
-
-    def combine_rules(self, rules, operator='AND'):
+    def combine_rules(self, rules, operators):
         """
-        Combines multiple rules into a single AST node.
+        Combines multiple rules into a single expression string.
 
-        :param rules: A list of rule strings.
-        :param operator: The operator to combine the rules ('AND' or 'OR').
-        :return: The combined AST root node.
+        :param rules: A list of dictionaries, each containing a 'rule'.
+        :param operators: A list of dictionaries, each containing an 'operator'.
+        :return: The combined expression string.
         """
-        ast_roots = [self.create_rule(rule) for rule in rules]
-        if not ast_roots:
-            return None
-        combined = ast_roots[0]
-        for ast_root in ast_roots[1:]:
-            combined = Node('operator', left=combined, right=ast_root, value=operator)
-        return combined
+        if len(rules) - 1 != len(operators):
+            raise ValueError("The number of operators must be one less than the number of rules.")
+        
+        combined_rule = rules[0]['rule']  # Start with the first rule
+        
+        # Combine each rule with the corresponding operator
+        for i in range(len(operators)):
+            combined_rule = f"({combined_rule}) {operators[i]['operator']} ({rules[i + 1]['rule']})"
+        
+        return combined_rule
 
     def safe_eval(self, data_value, op, value):
         """
@@ -122,6 +123,8 @@ class RuleEngine:
 
         if op == '==':
             return data_value == value
+        elif op == '=':
+            return data_value == value        
         elif op == '!=':
             return data_value != value
         elif op == '<':
