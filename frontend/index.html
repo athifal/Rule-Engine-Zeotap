@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rule Engine</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #result {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f1f1f1;
-            border-radius: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">  <!-- Link to your CSS file -->
 </head>
 <body>
 
     <h1>Create Rule</h1>
     <form id="ruleForm">
+        <label for="rule_name">Rule Name:</label>
+        <input type="text" id="rule_name" name="rule_name" placeholder="Enter rule name" required style="width: 100%; margin-bottom: 10px;">
+        
         <label for="rule_string">Enter Rule:</label>
         <input type="text" id="rule_string" name="rule_string" placeholder="e.g. age > 30 AND salary > 50000" required style="width: 100%;">
+
         <button type="submit">Submit</button>
     </form>
+
+    <h2>Evaluate Rule</h2>
+    <label for="ruleSelect">Select Rule:</label>
+    <select id="ruleSelect" style="width: 100%; margin-bottom: 10px;">
+        <option value="">Select a rule</option> <!-- Default option -->
+    </select>
+
+    <label for="dataInput">Input Data (JSON format):</label>
+    <input type="text" id="dataInput" placeholder='{"age": 35}' style="width: 100%; margin-bottom: 10px;">
+
+    <button id="evaluateButton">Evaluate Selected Rule</button>
 
     <div id="result">
         <h3>Result</h3>
@@ -32,38 +36,32 @@
         <p id="message"></p>
     </div>
 
-    <script>
-        document.getElementById("ruleForm").addEventListener("submit", function(event) {
-            event.preventDefault();
+    <h2>Combine Rules</h2>
+    <label for="ruleSelect1">Select Rule 1:</label>
+    <select id="ruleSelect1" style="width: 100%; margin-bottom: 10px;">
+        <option value="">Select a rule</option> <!-- Default option -->
+    </select>
 
-            // Get the rule string from input
-            const ruleString = document.getElementById("rule_string").value;
+    <label for="operatorSelect">Select Operator:</label>
+    <select id="operatorSelect" style="width: 100%; margin-bottom: 10px;">
+        <option value="AND">AND</option>
+        <option value="OR">OR</option>
+    </select>
 
-            // Prepare the request payload
-            const payload = {
-                rule_string: ruleString
-            };
+    <label for="ruleSelect2">Select Rule 2:</label>
+    <select id="ruleSelect2" style="width: 100%; margin-bottom: 10px;">
+        <option value="">Select a rule</option> <!-- Default option -->
+    </select>
 
-            // Make a POST request to the API
-            fetch("http://127.0.0.1:5000/create_rule", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Replace '\n' with '<br>' for proper HTML line breaks
-                const formattedAstTree = data.ast_tree.replace(/\n/g, '<br>');
-                document.getElementById("astResult").innerHTML = formattedAstTree;
-                document.getElementById("message").textContent = data.message;
-            })
-            .catch(error => {
-                document.getElementById("message").textContent = "Error: " + error.message;
-            });
-        });
-    </script>
+    <button id="combineButton">Combine Rules</button>
+
+    <div id="combineResult">
+        <h3>Combined Rule Result</h3>
+        <pre id="combinedAstResult"></pre>
+        <p id="combineMessage"></p>
+    </div>
+
+    <script src="script.js"></script>  <!-- Link to your JavaScript file -->
 
 </body>
 </html>
