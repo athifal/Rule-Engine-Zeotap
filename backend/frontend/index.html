@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rule Engine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Create Rule</h1>
+        </header>
+
+        <section class="form-section">
+            <form id="ruleForm">
+                <div class="form-group">
+                    <label for="rule_name">Rule Name:</label>
+                    <input type="text" id="rule_name" name="rule_name" placeholder="Enter rule name" required>
+                </div>
+                <div class="form-group">
+                    <label for="rule_string">Enter Rule:</label>
+                    <input type="text" id="rule_string" name="rule_string" placeholder="e.g. age > 30 AND salary > 50000" required>
+                </div>
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        
+            <div id="result" style="border: 1px solid #ccc; padding: 15px; margin-top: 20px; background-color: #f9f9f9;">
+                <h3 style="font-family: Arial, sans-serif; color: #333;">Result</h3>
+                <pre id="astResult" style="white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; background-color: #e0e0e0; padding: 10px; border-radius: 5px;"></pre>
+                <p id="message" style="color: red; font-weight: bold; font-size: 16px;"></p>
+            </div>
+            
+    </section>
+
+        <section class="combined-section">
+            <h2>Combined Rules</h2>
+            <div class="form-group">
+                <label for="rule_name_combine">Rule Name for Combining:</label>
+                <input type="text" id="rule_name_combine" placeholder="Enter rule name for combining rule" required>
+            </div>
+            <div id="combinedRulesContainer"></div>
+            <button id="addRuleButton" class="btn">Add Rule</button>
+            <button id="combineButton" class="btn">Combine Rules</button>
+
+            <div id="combinedResult">
+                <h3>Combined AST Result</h3>
+                <pre id="message3"></pre>
+                <p id="message4" style="color: red; font-weight: bold; font-size: 16px;"></p>
+            </div>
+        </section>
+        <section class="evaluate-section">
+            <h2>Evaluate Rule</h2>
+            <div class="form-group">
+                <label for="ruleSelect">Select Rule:</label>
+                <select id="ruleSelect">
+                    <option value="">Select a rule</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="dataInput">Input Data (JSON format):</label>
+                <input type="text" id="dataInput" placeholder='{"age": 35}'>
+            </div>
+            <button id="evaluateButton" class="btn">Evaluate Selected Rule</button>
+
+            <div id="result">
+                <h3>Result</h3>
+                <p id="messageevaluate" class="result-box"></p>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
