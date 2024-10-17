@@ -6,6 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rule Engine</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-section, .combined-section, .evaluate-section {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            border: 1px solid #ccc;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        #astResult, #message3 {
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #message, #message4 {
+            color: rgb(18, 214, 0);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+
+    </style>
 </head>
 
 <body>
@@ -27,30 +100,32 @@
                 <button type="submit" class="btn">Submit</button>
             </form>
         
-            <div id="result" style="border: 1px solid #ccc; padding: 15px; margin-top: 20px; background-color: #f9f9f9;">
+            <div id="result">
                 <h3 style="font-family: Arial, sans-serif; color: #333;">Result</h3>
-                <pre id="astResult" style="white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; background-color: #e0e0e0; padding: 10px; border-radius: 5px;"></pre>
-                <p id="message" style="color: red; font-weight: bold; font-size: 16px;"></p>
+                <pre id="astResult"></pre>
+                <br>
+                <br>
+                <p id="message"></p>
             </div>
-            
-    </section>
+        </section>
 
         <section class="combined-section">
-            <h2>Combined Rules</h2>
+            <h2>Combine Rules</h2>
             <div class="form-group">
-                <label for="rule_name_combine">Rule Name for Combining:</label>
+                <label for="rule_name_combine">Rule Name for Combining rules:</label>
                 <input type="text" id="rule_name_combine" placeholder="Enter rule name for combining rule" required>
             </div>
             <div id="combinedRulesContainer"></div>
-            <button id="addRuleButton" class="btn">Add Rule</button>
+            <button id="addRuleButton" class="btn">Add more Rules</button>
             <button id="combineButton" class="btn">Combine Rules</button>
 
             <div id="combinedResult">
                 <h3>Combined AST Result</h3>
                 <pre id="message3"></pre>
-                <p id="message4" style="color: red; font-weight: bold; font-size: 16px;"></p>
+                <p id="message4"></p>
             </div>
         </section>
+
         <section class="evaluate-section">
             <h2>Evaluate Rule</h2>
             <div class="form-group">

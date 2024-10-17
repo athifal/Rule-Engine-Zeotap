@@ -55,7 +55,7 @@ class RuleResource(Resource):
         return {
             'rule_name': rule_name,
             'ast_tree': ast_tree.strip(),  # Ensure to strip any leading/trailing whitespace
-            'message': 'Rule created successfully'
+            'message': f'{rule_name} created successfully'
         }, 201
 class CombineRulesResource(Resource):
     def post(self):
