@@ -38,6 +38,14 @@ class RuleResource(Resource):
         ast_tree = output.getvalue()
         # Save the rule to the database
         session = Session()  # Create a new session
+        existing_rule = session.query(Rule).filter_by(name=rule_name).first()
+        
+        if existing_rule:
+            session.close()  # Close the session
+            # If the rule name already exists, return an error response
+            return {
+                'message': f"Rule with name '{rule_name}' already exists. Please choose a different name."
+            }, 400  # 400 Bad Request
         new_rule = Rule(name=args['rule_name'], rule_string=args['rule_string'], ast=ast_tree)
         session.add(new_rule)  # Add the new rule to the session
         session.commit()  # Commit the session to save the rule
@@ -52,10 +60,12 @@ class RuleResource(Resource):
 class CombineRulesResource(Resource):
     def post(self):
         parser = reqparse.RequestParser()
+        parser.add_argument('rule_names', type=str, required=True,location='json', help="Rule name cannot be blank!")
         parser.add_argument('rules', type=list, location='json', required=True, help="Rules list cannot be blank!")
         parser.add_argument('operators', type=list, location='json', required=True, help="Operator must be either 'AND' or 'OR'!")
         args = parser.parse_args()
         operator=args['operators']
+
         combined_ast = rule_engine.combine_rules(args['rules'], operator)
         combined_ast2 = rule_engine.create_rule(combined_ast)
         output = StringIO()
@@ -68,7 +78,20 @@ class CombineRulesResource(Resource):
         
         # Get printed output for tree representation
         ast_tree = output.getvalue()
-        return {'combined_ast':ast_tree }, 201
+        session = Session()
+        existing_rule = session.query(Rule).filter_by(name=args['rule_names']).first()
+        
+        if existing_rule:
+            session.close()  # Close the session
+            # If the rule name already exists, return an error response
+            return {
+                'message': f"Rule with name '{args['rule_names']}' already exists. Please choose a different name."
+            }, 400  # 400 Bad Request
+        new_rule = Rule(name=args['rule_names'], rule_string=combined_ast, ast=ast_tree)
+        session.add(new_rule)  # Add the new rule to the session
+        session.commit()  # Commit the session to save the rule
+        session.close()        
+        return {'message': 'Rules combined  successfully','combined_ast':ast_tree }, 201
 
 class EvaluateRuleResource(Resource):
     def post(self):
