@@ -41,21 +41,43 @@ This project is a **Rule Engine** built with **Flask** and **SQLAlchemy**, provi
 └── rules.db                  # SQLite database " give full code and i can copy the all code
 ```
 
-## 1. Installation Instructions
+##  Installation Instructions
 Guide to set up the project in a local environment.
 
 
 ### Setup Instructions
 Follow these steps to set up the project:
 
+
+### Clone the repository
 ```bash
-# Clone the repository
 git clone <repository-url>
 cd <repository-folder>
+```
+### Set up a virtual environment (recommended)
+```bash
 
-# Set up a virtual environment (recommended)
 python3 -m venv venv
 source venv/bin/activate   # On Windows use `venv\Scripts\activate`
-
-# Install the required dependencies
+```
+### Install the required dependencies
+```bash
 pip install -r requirements.txt
+```
+### Run the application:
+```bash
+python app.py
+```
+#### Open your browser and go to http://localhost:5000.
+## API Endpoints
+
+- `POST /create_rule`: Create a new rule.
+- `POST /combine_rules`: Combine multiple rules with logical operators (AND/OR).
+- `POST /evaluate_rule`: Evaluate a rule against a dataset.
+- `GET /grt_rules`: Get all stored rules.
+## Database Information
+The application uses SQLite to store rules. The database file rules.db will be automatically generated in the root directory when the Flask application is first run.
+To inspect the database, use any SQLite browser or command-line tool:
+```bash
+sqlite3 rules.db
+```
