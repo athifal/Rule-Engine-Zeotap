@@ -2,6 +2,9 @@
 
 This project is a **Rule Engine** built with **Flask** and **SQLAlchemy**, providing an API for creating, combining, and evaluating rules based on custom logical expressions. It supports CRUD operations for rules stored in a SQLite database and offers functionalities for evaluating these rules against given data.
 
+## Objective
+The objective of this application is to develop a rule engine that determines user eligibility based on attributes such as age, department, income, and spend. The engine utilizes an Abstract Syntax Tree (AST) to represent conditional rules.
+
 ## Features
 
 - Create rules with custom logical expressions.
@@ -51,8 +54,8 @@ Follow these steps to set up the project:
 
 ### Clone the repository
 ```bash
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/athifal/Rule-Engine-Zeotap.git
+cd Rule-Engine-Zeotap
 ```
 ### Set up a virtual environment (recommended)
 ```bash
