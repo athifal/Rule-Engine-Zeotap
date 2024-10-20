@@ -15,7 +15,7 @@ The objective of this application is to develop a rule engine that determines us
 
 ## Technologies Used
 
-- **Backend**: Flask, Flask-RESTful, SQLAlchemy, SQLite
+- **Backend**: Python, Flask, Flask-RESTful, SQLAlchemy, SQLite
 - **Frontend**: HTML, CSS, JavaScript (Optional)
 - **Database**: SQLite
 - **Others**: Flask-CORS
