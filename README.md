@@ -48,9 +48,28 @@ The objective of this application is to develop a rule engine that determines us
 Guide to set up the project in a local environment.
 
 
-### Setup Instructions
-Follow these steps to set up the project:
 
+### Prerequisites
+Before you can run this project, you need to have Python installed on your system.
+
+### Installation
+
+#### Step 1: Installing Python
+
+1. **Download Python**:
+   - Visit the official Python website: [https://www.python.org/downloads/](https://www.python.org/downloads/)
+   - Download the latest stable version of Python for your operating system.
+
+2. **Install Python**:
+   - Run the downloaded installer.
+   - **Windows**: Ensure that you check the box that says "Add Python to PATH" during installation.
+   - **Mac/Linux**: Follow the instructions on the download page.
+
+3. **Verify Python Installation**:
+   Open a terminal (Command Prompt or PowerShell on Windows, Terminal on Mac/Linux) and type the following command:
+   ```bash
+   python --version
+   ```
 
 ### Clone the repository
 ```bash
